@@ -8,7 +8,8 @@
     <table class="table">
         <thead>
             <tr>
-                <th>Id</th>
+                <th>De</th>
+                <th>envers</th>
                 <th>Date</th>
                 <th>Description</th>
                 <th>actions</th>
@@ -17,7 +18,9 @@
         <tbody>
         {% for thank in thanks %}
             <tr>
-                <td>{{ thank.id }}</td>
+                {% dump(thank) %}
+                <td>{{ thank.byUser.username }}</td>
+                <td>{{ thank.toUser.username }}</td>
                 <td>{{ thank.date ? thank.date|date('Y-m-d H:i:s') : '' }}</td>
                 <td>{{ thank.description }}</td>
                 <td>

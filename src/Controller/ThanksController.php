@@ -30,6 +30,7 @@ final class ThanksController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $thank->setDate(new \DateTime());
             $entityManager->persist($thank);
             $entityManager->flush();
 
