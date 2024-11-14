@@ -50,9 +50,11 @@ class Thanks
         return $this->toUser;
     }
 
-    public function setToUser(?User $toUser): void
+    public function setToUser(?User $toUser): static
     {
         $this->toUser = $toUser;
+
+        return $this;
     }
 
     public function getDate(): ?\DateTimeInterface

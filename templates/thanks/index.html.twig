@@ -1,0 +1,37 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Thanks index{% endblock %}
+
+{% block body %}
+    <h1>Thanks index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Date</th>
+                <th>Description</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for thank in thanks %}
+            <tr>
+                <td>{{ thank.id }}</td>
+                <td>{{ thank.date ? thank.date|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ thank.description }}</td>
+                <td>
+                    <a href="{{ path('app_thanks_show', {'id': thank.id}) }}">show</a>
+                    <a href="{{ path('app_thanks_edit', {'id': thank.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="4">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_thanks_new') }}">Create new</a>
+{% endblock %}
