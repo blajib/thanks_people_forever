@@ -23,8 +23,7 @@ class ThanksType extends AbstractType
                 'class' => User::class,
                 'choice_label' => 'username',
             ])
-            ->add('description', TextareaType::class)
-        ;
+            ->add('description', TextareaType::class);
     }
 
     public function configureOptions(OptionsResolver $resolver): void

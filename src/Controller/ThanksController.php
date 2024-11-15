@@ -11,10 +11,9 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 
-#[Route('/thanks')]
 final class ThanksController extends AbstractController
 {
-    #[Route(name: 'app_thanks_index', methods: ['GET'])]
+    #[Route('/', name: 'app_thanks_index', methods: ['GET'])]
     public function index(ThanksRepository $thanksRepository): Response
     {
         return $this->render('thanks/index.html.twig', [
@@ -22,7 +21,7 @@ final class ThanksController extends AbstractController
         ]);
     }
 
-    #[Route('/new', name: 'app_thanks_new', methods: ['GET', 'POST'])]
+    #[Route('/thanks/new', name: 'app_thanks_new', methods: ['GET', 'POST'])]
     public function new(Request $request, EntityManagerInterface $entityManager): Response
     {
         $thank = new Thanks();
@@ -43,7 +42,7 @@ final class ThanksController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}', name: 'app_thanks_show', methods: ['GET'])]
+    #[Route('/thanks/{id}', name: 'app_thanks_show', methods: ['GET'])]
     public function show(Thanks $thank): Response
     {
         return $this->render('thanks/show.html.twig', [
@@ -51,7 +50,7 @@ final class ThanksController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}/edit', name: 'app_thanks_edit', methods: ['GET', 'POST'])]
+    #[Route('/thanks/{id}/edit', name: 'app_thanks_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, Thanks $thank, EntityManagerInterface $entityManager): Response
     {
         $form = $this->createForm(ThanksType::class, $thank);
@@ -72,7 +71,7 @@ final class ThanksController extends AbstractController
     #[Route('/{id}', name: 'app_thanks_delete', methods: ['POST'])]
     public function delete(Request $request, Thanks $thank, EntityManagerInterface $entityManager): Response
     {
-        if ($this->isCsrfTokenValid('delete'.$thank->getId(), $request->getPayload()->getString('_token'))) {
+        if ($this->isCsrfTokenValid('delete' . $thank->getId(), $request->getPayload()->getString('_token'))) {
             $entityManager->remove($thank);
             $entityManager->flush();
         }

@@ -22,6 +22,9 @@ class User
     #[ORM\Column(length: 100)]
     private ?string $email = null;
 
+    #[ORM\Column(length: 255)]
+    private ?string $profilImage = null;
+
     #[ORM\OneToMany(targetEntity: Thanks::class, mappedBy: 'byUser')]
     private Collection $givingThanks;
 
@@ -115,5 +118,15 @@ class User
         }
 
         return $this;
+    }
+
+    public function getProfilImage(): ?string
+    {
+        return $this->profilImage;
+    }
+
+    public function setProfilImage(?string $profilImage): void
+    {
+        $this->profilImage = $profilImage;
     }
 }

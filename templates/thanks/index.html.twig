@@ -3,34 +3,59 @@
 {% block title %}Thanks index{% endblock %}
 
 {% block body %}
-    <h1>Thanks index</h1>
+    <h1>Thanks people forever</h1>
 
     <table class="table">
         <thead>
-            <tr>
-                <th>De</th>
-                <th>envers</th>
-                <th>Date</th>
-                <th>Description</th>
-                <th>actions</th>
-            </tr>
+        <tr>
+            <th>De</th>
+            <th>envers</th>
+            <th>Date</th>
+            <th>Description</th>
+            <th>actions</th>
+        </tr>
         </thead>
         <tbody>
         {% for thank in thanks %}
             <tr>
-                {% dump(thank) %}
-                <td>{{ thank.byUser.username }}</td>
-                <td>{{ thank.toUser.username }}</td>
-                <td>{{ thank.date ? thank.date|date('Y-m-d H:i:s') : '' }}</td>
+                <td>
+                    <div class="profil-image-container">
+                        {% if thank.byUser.profilImage is not empty %}
+                            <img class="profil-image"
+                                 src="{{ asset('uploads/profil-images/' ~ thank.byUser.profilImage) }}"
+                                 alt="Image de profil">
+                        {% else %}
+                            {% dump('je suis la') %}
+                            <img class="profil-image"
+                                 src="{{ asset('default/default_avatar.png') }}"
+                                 alt="Image de profil">
+                        {% endif %}
+                    </div>
+                    {{ thank.byUser.username }} <a href="{{ path('app_user_edit',{'id': thank.byUser.id}) }}">Edit</a>
+                </td>
+                <td>
+                    <div class="profil-image-container">
+                        {% if thank.toUser.profilImage is not empty %}
+                            <img class="profil-image"
+                                 src="{{ asset('uploads/profil-images/' ~ thank.toUser.profilImage) }}"
+                                 alt="Image de profil">
+                        {% else %}
+                            <img class="profil-image"
+                                 src="{{ asset('default/default_avatar.png') }}"
+                                 alt="Image de profil">
+                        {% endif %}
+                    </div>
+                    {{ thank.toUser.username }} <a href="{{ path('app_user_edit',{'id': thank.toUser.id}) }}">Edit</a>
+                </td>
+                <td>{{ thank.date ? thank.date|date('Y-m-d') : '' }}</td>
                 <td>{{ thank.description }}</td>
                 <td>
-                    <a href="{{ path('app_thanks_show', {'id': thank.id}) }}">show</a>
                     <a href="{{ path('app_thanks_edit', {'id': thank.id}) }}">edit</a>
                 </td>
             </tr>
         {% else %}
             <tr>
-                <td colspan="4">no records found</td>
+                <td colspan="4">Pas de mercis</td>
             </tr>
         {% endfor %}
         </tbody>

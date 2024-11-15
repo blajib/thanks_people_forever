@@ -1,3 +1,24 @@
 body {
-    background-color: skyblue;
+    font-family: 'Impact', serif;
+    background-color: white;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
 }
+
+.profil-image {
+    width: 40px;
+    height: 40px;
+    object-fit: cover;
+    border-radius: 50%;
+}
+
+.profil-image-container {
+    width: 40px;
+    height: 40px;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
